@@ -97,10 +97,80 @@ The landing page features a unique scroll-based frame animation with 240 frames 
 ## 🚀 Deployment
 
 This site can be deployed to:
-- Netlify
-- Vercel
+- Netlify (configured with `netlify.toml`)
+- Vercel (configured with `vercel.json`)
 - GitHub Pages
 - Any static hosting service
+
+### Deploying to Vercel
+
+The project is pre-configured for Vercel deployment with `vercel.json`. You can deploy using one of the following methods:
+
+#### Method 1: Vercel CLI (Recommended)
+
+1. Install Vercel CLI globally:
+```bash
+npm i -g vercel
+```
+
+2. Navigate to the project directory:
+```bash
+cd Nerdx_Landing_Page
+```
+
+3. Deploy to Vercel:
+```bash
+vercel
+```
+
+4. Follow the prompts to link your project or create a new one.
+
+5. For production deployment:
+```bash
+vercel --prod
+```
+
+#### Method 2: Git Integration (Automatic Deployments)
+
+1. Push your code to GitHub, GitLab, or Bitbucket.
+
+2. Go to [vercel.com](https://vercel.com) and sign in.
+
+3. Click "Add New Project" and import your repository.
+
+4. Vercel will automatically detect the static site configuration:
+   - **Framework Preset**: Other (or leave as auto-detected)
+   - **Root Directory**: `./` (default)
+   - **Build Command**: Leave empty (no build needed)
+   - **Output Directory**: `.` (serves from root)
+
+5. Click "Deploy" and Vercel will automatically deploy your site.
+
+6. Your site will be live at `https://your-project-name.vercel.app`
+
+#### Method 3: Drag & Drop
+
+1. Go to [vercel.com](https://vercel.com) and sign in.
+
+2. Drag and drop the project folder onto the Vercel dashboard.
+
+3. Vercel will automatically deploy your site.
+
+#### Vercel Configuration
+
+The `vercel.json` file includes:
+- **Clean URLs**: Removes `.html` extensions from URLs
+- **Caching Headers**: Optimized caching for static assets (images, CSS, JS)
+- **Security Headers**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- **SPA Routing**: All routes redirect to `index.html` for client-side routing support
+
+#### Custom Domain
+
+To add a custom domain:
+1. Go to your project settings on Vercel
+2. Navigate to "Domains"
+3. Add your custom domain
+4. Follow the DNS configuration instructions
 
 ## 📄 License
 
