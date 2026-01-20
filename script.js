@@ -1,11 +1,11 @@
-// Scroll-based Frame Animation
+// Scroll-based Frame Animation with lazy loading
 const frameCount = 240;
 const frameAnimation = {
     canvas: null,
     context: null,
-    frames: [],
+    frames: [], // Cache for loaded frames
     currentFrame: 0,
-    imagesLoaded: 0,
+    loadingFrames: new Set(), // Track frames currently loading
 
     init() {
         this.canvas = document.getElementById('frame-animation');
@@ -15,26 +15,11 @@ const frameAnimation = {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
 
-        // Preload all frames
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            const frameNumber = i.toString().padStart(3, '0');
-            img.src = `frames/ezgif-frame-${frameNumber}.jpg`;
+        // Initialize frame array
+        this.frames = new Array(frameCount);
 
-            img.onload = () => {
-                this.imagesLoaded++;
-                if (this.imagesLoaded === frameCount) {
-                    console.log('All frames loaded!');
-                    this.render();
-                }
-            };
-
-            img.onerror = () => {
-                console.warn(`Failed to load frame ${frameNumber}`);
-            };
-
-            this.frames.push(img);
-        }
+        // Preload first few frames for immediate display
+        this.preloadFrames(1, Math.min(10, frameCount));
 
         // Handle window resize
         window.addEventListener('resize', () => {
@@ -47,28 +32,72 @@ const frameAnimation = {
         window.addEventListener('scroll', () => {
             this.updateFrame();
         });
+
+        // Initial render
+        this.updateFrame();
+    },
+
+    preloadFrames(start, end) {
+        for (let i = start; i <= end; i++) {
+            if (this.frames[i - 1] || this.loadingFrames.has(i)) continue;
+            this.loadFrame(i);
+        }
+    },
+
+    loadFrame(frameNumber) {
+        if (this.frames[frameNumber - 1] || this.loadingFrames.has(frameNumber)) {
+            return;
+        }
+
+        this.loadingFrames.add(frameNumber);
+        const img = new Image();
+        const paddedNumber = frameNumber.toString().padStart(3, '0');
+        img.src = `frames/ezgif-frame-${paddedNumber}.jpg`;
+
+        img.onload = () => {
+            this.frames[frameNumber - 1] = img;
+            this.loadingFrames.delete(frameNumber);
+            if (frameNumber === this.currentFrame + 1) {
+                this.render();
+            }
+        };
+
+        img.onerror = () => {
+            console.warn(`Failed to load frame ${paddedNumber}`);
+            this.loadingFrames.delete(frameNumber);
+        };
     },
 
     updateFrame() {
         const scrollTop = window.pageYOffset;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollFraction = scrollTop / maxScroll;
+        const scrollFraction = maxScroll > 0 ? scrollTop / maxScroll : 0;
         const frameIndex = Math.min(
             frameCount - 1,
             Math.floor(scrollFraction * frameCount)
         );
 
-        if (frameIndex !== this.currentFrame && this.frames[frameIndex]) {
+        if (frameIndex !== this.currentFrame) {
             this.currentFrame = frameIndex;
+            
+            // Load current frame and nearby frames
+            const loadRange = 5; // Load 5 frames ahead and behind
+            const startFrame = Math.max(1, frameIndex + 1 - loadRange);
+            const endFrame = Math.min(frameCount, frameIndex + 1 + loadRange);
+            this.preloadFrames(startFrame, endFrame);
+            
             this.render();
         }
     },
 
     render() {
-        if (!this.context || !this.frames[this.currentFrame]) return;
+        if (!this.context) return;
 
         const img = this.frames[this.currentFrame];
-        if (!img.complete) return;
+        if (!img || !img.complete) {
+            // Show placeholder or previous frame if current isn't loaded
+            return;
+        }
 
         // Clear canvas
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
