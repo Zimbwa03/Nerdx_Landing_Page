@@ -611,6 +611,114 @@ section {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
+/* Video Section */
+.video-section {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.video-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.video-card {
+    position: relative;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.video-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover::before {
+    transform: scaleX(1);
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.nerdx-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    outline: none;
+}
+
+.video-loading,
+.video-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: var(--text-white);
+    z-index: 10;
+}
+
+.video-loading p,
+.video-error p {
+    font-size: 16px;
+    color: var(--text-gray);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.video-error svg {
+    width: 60px;
+    height: 60px;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+}
+
+.video-error .btn {
+    margin-top: 10px;
+}
+
 /* How It Works Section */
 .steps-container {
     display: flex;
@@ -1242,6 +1350,10 @@ section {
         flex-direction: column;
     }
 
+    .video-card {
+        padding: 20px;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1286,6 +1398,14 @@ section {
 
     .download-card {
         padding: 40px 20px;
+    }
+
+    .video-card {
+        padding: 15px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
     }
 }
 

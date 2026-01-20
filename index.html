@@ -18,10 +18,10 @@
     <meta property="og:phone_number" content="+263 78544595">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="icon" type="image/png" href="nerdx-logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="nerdx-logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="nerdx-logo.png">
+    <link rel="apple-touch-icon" href="nerdx-logo.png">
     
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <div class="nav-brand">
-                <img src="nerdx-logo.svg" alt="NerdX Logo" class="logo">
+                <img src="nerdx-logo.png" alt="NerdX Logo" class="logo">
                 <span class="brand-name">NerdX</span>
             </div>
             <ul class="nav-menu" id="nav-menu">
@@ -136,6 +136,44 @@
                         <div class="card-content">
                             <div class="card-title">30 Day Streak</div>
                             <div class="card-subtitle">Amazing!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">See <span class="gradient-text">NerdX in Action</span></h2>
+                <p class="section-subtitle">Watch how NerdX helps students master their exams with AI-powered learning</p>
+            </div>
+            <div class="video-container">
+                <div class="video-card">
+                    <div class="video-wrapper" id="video-wrapper">
+                        <video 
+                            id="nerdx-video" 
+                            class="nerdx-video"
+                            controls 
+                            preload="metadata"
+                            playsinline
+                            aria-label="NerdX demo video showing how the app helps students learn"
+                            poster="">
+                            <source src="https://lzteiewcvxoazqfxfjgg.supabase.co/storage/v1/object/sign/Audio_Notes/Chemistry%20/video/InShot_20260114_155648490.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNzUyNjcyMy1jNjY2LTRjMzQtOWFmYy1hZDBjMmI3ZGYyMGMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJBdWRpb19Ob3Rlcy9DaGVtaXN0cnkgL3ZpZGVvL0luU2hvdF8yMDI2MDExNF8xNTU2NDg0OTAubXA0IiwiaWF0IjoxNzY4OTA4MTQ4LCJleHAiOjUyNjk0MDQxNDh9.v7-rK7bnW_Hh7PgQj9ViQMKnNXJbnqyKQpjnTMZMVL8" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-loading" id="video-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading video...</p>
+                        </div>
+                        <div class="video-error" id="video-error" style="display: none;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p>Unable to load video</p>
+                            <a href="https://lzteiewcvxoazqfxfjgg.supabase.co/storage/v1/object/sign/Audio_Notes/Chemistry%20/video/InShot_20260114_155648490.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNzUyNjcyMy1jNjY2LTRjMzQtOWFmYy1hZDBjMmI3ZGYyMGMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJBdWRpb19Ob3Rlcy9DaGVtaXN0cnkgL3ZpZGVvL0luU2hvdF8yMDI2MDExNF8xNTU2NDg0OTAubXA0IiwiaWF0IjoxNzY4OTA4MTQ4LCJleHAiOjUyNjk0MDQxNDh9.v7-rK7bnW_Hh7PgQj9ViQMKnNXJbnqyKQpjnTMZMVL8" target="_blank" class="btn btn-primary">Open Video in New Tab</a>
                         </div>
                     </div>
                 </div>

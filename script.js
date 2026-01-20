@@ -326,10 +326,93 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
+// Video Section - Lazy Loading and Error Handling
+const videoSection = {
+    video: null,
+    loadingElement: null,
+    errorElement: null,
+    wrapper: null,
+    observer: null,
+
+    init() {
+        this.video = document.getElementById('nerdx-video');
+        this.loadingElement = document.getElementById('video-loading');
+        this.errorElement = document.getElementById('video-error');
+        this.wrapper = document.getElementById('video-wrapper');
+
+        if (!this.video || !this.wrapper) return;
+
+        // Set up Intersection Observer for lazy loading
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadVideo();
+                    this.observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '100px' // Start loading when 100px away from viewport
+        });
+
+        this.observer.observe(this.wrapper);
+
+        // Error handling
+        this.video.addEventListener('error', () => {
+            this.handleError();
+        });
+
+        // Hide loading when video can play
+        this.video.addEventListener('canplay', () => {
+            this.hideLoading();
+        });
+
+        // Handle video load start
+        this.video.addEventListener('loadstart', () => {
+            this.showLoading();
+        });
+    },
+
+    loadVideo() {
+        // Only load when user scrolls near
+        if (this.video && this.video.preload === 'metadata') {
+            // Video will start loading metadata, full load happens on play
+            this.video.load();
+        }
+    },
+
+    showLoading() {
+        if (this.loadingElement) {
+            this.loadingElement.style.display = 'flex';
+        }
+        if (this.errorElement) {
+            this.errorElement.style.display = 'none';
+        }
+    },
+
+    hideLoading() {
+        if (this.loadingElement) {
+            this.loadingElement.style.display = 'none';
+        }
+    },
+
+    handleError() {
+        this.hideLoading();
+        if (this.errorElement) {
+            this.errorElement.style.display = 'flex';
+        }
+        if (this.video) {
+            this.video.style.display = 'none';
+        }
+    }
+};
+
 // Initialize on page load
 window.addEventListener('load', () => {
     // Initialize frame animation
     frameAnimation.init();
+
+    // Initialize video section
+    videoSection.init();
 
     // Add any initialization code here
     console.log('NerdX Landing Page Loaded Successfully!');
