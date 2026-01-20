@@ -8,13 +8,6 @@
 [build.environment]
   # No environment variables needed
 
-# Disable Next.js plugin - this is NOT a Next.js project
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  
-  [plugins.inputs]
-    disable = true
-
 [[redirects]]
   # Redirect all 404s to index.html for SPA behavior
   from = "/*"
