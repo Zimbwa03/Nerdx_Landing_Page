@@ -3,4 +3,4 @@
   publish = "."
   
   # No build needed for static HTML site
-  command = "echo 'Deploying static site'"
+  command = "echo 'No build required - static site'"
