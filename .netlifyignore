@@ -1,0 +1,9 @@
+# Ignore Next.js app directory - we're deploying static HTML only
+app/
+components/
+
+# Ignore workspace files
+*.code-workspace
+
+# Ignore test files
+test-frames.html

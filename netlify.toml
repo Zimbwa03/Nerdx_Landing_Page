@@ -1,9 +1,9 @@
 [build]
-  # Publish the root directory - all files are in the root
+  # Publish the root directory - serving static HTML files only
   publish = "."
   
-  # No build command needed for static site - using empty string
-  command = "echo 'Static site - no build required'"
+  # No build needed for static HTML site
+  command = "echo 'Deploying static site'"
 
 # Headers for better caching and security
 [[headers]]
