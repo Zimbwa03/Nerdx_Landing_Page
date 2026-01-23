@@ -230,34 +230,6 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-// Download button handlers
-const iosDownload = document.getElementById('ios-download');
-const androidDownload = document.getElementById('android-download');
-
-iosDownload.addEventListener('click', (e) => {
-    e.preventDefault();
-    // Check if App Store link is available
-    const appStoreLink = 'https://apps.apple.com/'; // Replace with actual link when available
-
-    // For now, show a message
-    alert('iOS App Store approval is pending. Please check back soon or contact us for direct download options.');
-
-    // Uncomment when App Store link is available:
-    // window.open(appStoreLink, '_blank');
-});
-
-androidDownload.addEventListener('click', (e) => {
-    e.preventDefault();
-    // Check if Play Store link is available
-    const playStoreLink = 'https://play.google.com/store/apps/'; // Replace with actual link when available
-
-    // For now, show a message
-    alert('Google Play Store approval is pending. Please check back soon or contact us for direct download options.');
-
-    // Uncomment when Play Store link is available:
-    // window.open(playStoreLink, '_blank');
-});
-
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
